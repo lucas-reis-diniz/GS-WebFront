@@ -1,25 +1,29 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import './Login.scss';
-import Header from '../../components/Header/Header';
+import Baleia from '../../assets/baleia.svg';
 
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const history = useHistory();
 
     const handleLogin = async (e) => {
         e.preventDefault(); // Evitar o recarregamento da página após o envio do formulário
 
         try {
-            const response = await fetch('/user.json'); // Lê o arquivo JSON local
+            const response = await fetch('http://localhost:3001/api/user'); // Lê o arquivo JSON da API interna
             if (!response.ok) {
-                throw new Error('Falha ao carregar o arquivo de usuário');
+                throw new Error('Falha ao carregar o arquivo de usuário')
             }
 
             const userData = await response.json();
+            console.log('Dados do usuário carregados:', userData);
+
             if (username === userData.username && password === userData.password) {
-                console.log('Login bem-sucedido');
-                // Você pode redirecionar para outra página ou fazer algo aqui após o login bem-sucedido
+                console.log('Login bem-sucedido')
+                history.push('/Data')
             } else {
                 setErrorMessage('Nome de usuário ou senha incorretos');
             }
@@ -31,24 +35,36 @@ function Login() {
 
     return (
         <main>
-            <div className="main-container">
-                <Header />
-                <form onSubmit={handleLogin} className="login-form">
-                    <input
-                        type="text"
-                        placeholder="Nome de usuário"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-                    <input
-                        type="password"
-                        placeholder="Senha"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <button type="submit">Login</button>
-                    {errorMessage && <div className="error-message">{errorMessage}</div>}
-                </form>
+            <div className="main-container-login">
+                <div className='left-container'>
+                    <div className='left-container-title'>
+                        <h1>OCEANS</h1>
+                        <h2>WATCH</h2>
+                    </div>
+                    <img src={Baleia} alt="img-baleia" className='img-baleia-login'/>
+                </div>
+                <div className='right-container'>
+                    <div className='right-container-title'>
+                        <h2>LOGIN</h2>
+                        <p>Entre agora para conferir os novos dados sobre o oceano!</p>
+                    </div>
+                    <form onSubmit={handleLogin} className="login-form">
+                        <input
+                            type="text"
+                            placeholder="Usuario"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+                        <input
+                            type="password"
+                            placeholder="Senha"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <button type="submit" className='login-btn'>Entrar</button>
+                        {errorMessage && <div className="error-message">{errorMessage}</div>}
+                    </form>
+                </div>
             </div>
         </main>
     );

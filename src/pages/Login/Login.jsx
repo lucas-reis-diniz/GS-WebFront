@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './Login.scss';
 import Baleia from '../../assets/baleia.svg';
 
@@ -7,7 +7,7 @@ function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const history = useHistory();
+    const navigate = useNavigate(); // Use useNavigate instead of useHistory
 
     const handleLogin = async (e) => {
         e.preventDefault(); // Evitar o recarregamento da página após o envio do formulário
@@ -15,15 +15,15 @@ function Login() {
         try {
             const response = await fetch('http://localhost:3001/api/user'); // Lê o arquivo JSON da API interna
             if (!response.ok) {
-                throw new Error('Falha ao carregar o arquivo de usuário')
+                throw new Error('Falha ao carregar o arquivo de usuário');
             }
 
             const userData = await response.json();
             console.log('Dados do usuário carregados:', userData);
 
             if (username === userData.username && password === userData.password) {
-                console.log('Login bem-sucedido')
-                history.push('/Data')
+                console.log('Login bem-sucedido');
+                navigate('/Data'); 
             } else {
                 setErrorMessage('Nome de usuário ou senha incorretos');
             }
@@ -50,7 +50,7 @@ function Login() {
                     </div>
                     <form onSubmit={handleLogin} className="login-form">
                         <input
-                            type="text"
+                            type="username"
                             placeholder="Usuario"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}

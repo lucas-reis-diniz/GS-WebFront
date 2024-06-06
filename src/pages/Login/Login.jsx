@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { auth, provider } from './configGoogle';
+import { signInWithPopup } from 'firebase/auth';
+import googleBtn from '../../assets/web_neutral_rd_na@2x.png'
 import './Login.scss';
 import Baleia from '../../assets/baleia.svg';
 
@@ -7,7 +10,7 @@ function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const navigate = useNavigate(); // Use useNavigate instead of useHistory
+    const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault(); // Evitar o recarregamento da página após o envio do formulário
@@ -23,6 +26,8 @@ function Login() {
 
             if (username === userData.username && password === userData.password) {
                 console.log('Login bem-sucedido');
+                // Salvar dados do usuário na sessão
+                localStorage.setItem('user', JSON.stringify(userData));
                 navigate('/Data'); 
             } else {
                 setErrorMessage('Nome de usuário ou senha incorretos');
@@ -32,6 +37,27 @@ function Login() {
             setErrorMessage('Erro ao fazer login. Por favor, tente novamente mais tarde.');
         }
     };
+
+    const handleClick = () => {
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                const user = result.user;
+                console.log('Usuário logado com sucesso:', user);
+                // Salvar dados do usuário na sessão
+                localStorage.setItem('user', JSON.stringify(user));
+                navigate('/Data');
+            })
+            .catch((error) => {
+                console.error('Erro ao fazer login com o Google:', error);
+                setErrorMessage('Erro ao fazer login com o Google. Por favor, tente novamente mais tarde.');
+            });
+    };
+
+    useEffect(() => {
+        if (localStorage.getItem('user')) {
+            navigate('/Data');
+        }
+    }, [navigate]);
 
     return (
         <main>
@@ -50,7 +76,7 @@ function Login() {
                     </div>
                     <form onSubmit={handleLogin} className="login-form">
                         <input
-                            type="username"
+                            type="text"
                             placeholder="Usuario"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
@@ -62,6 +88,7 @@ function Login() {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                         <button type="submit" className='login-btn'>Entrar</button>
+                        <img src={googleBtn} alt="" className="google-btn" onClick={handleClick}/>
                         {errorMessage && <div className="error-message">{errorMessage}</div>}
                     </form>
                 </div>

@@ -6,6 +6,7 @@ import Home from './pages/Home/Home.jsx'
 import About from './pages/About/About.jsx'
 import Data from './pages/Data/Data.jsx'
 import Login from './pages/Login/Login.jsx'
+import ProtectedRoute from './components/ProtectedRoute.js'
 
 
 const router = createBrowserRouter ([
@@ -17,7 +18,7 @@ const router = createBrowserRouter ([
       {path: '/', element: <Home />},
       {path: '/About', element: <About />},
       {path: '/Login', element: <Login />},
-      {path: '/Data', element: <Data />}
+      {path: '/Data', element: <ProtectedRoute element={<Data />} />}
     ]
   }
 ])

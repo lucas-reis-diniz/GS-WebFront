@@ -1,0 +1,75 @@
+.webcam-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    gap: 5rem;
+    box-sizing: border-box;
+}
+
+.webcam-video {
+    width: 80%;
+    max-width: 600px; /* Limita o tamanho máximo */
+    height: auto; /* Mantém a proporção */
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.results-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 3rem;
+    justify-content: center;
+    align-content: center;
+}
+
+.result {
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    height: auto; /* Altura ajustada para conteúdo */
+    width: 100%; /* Largura ajustada para preencher o espaço disponível */
+    max-width: 50rem; /* Limita o tamanho máximo */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateX(20px);
+    animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 768px) {
+    .webcam-video {
+        width: 95%; /* Aumenta a largura para preencher mais espaço */
+    }
+
+    .result {
+        padding: 5px; /* Padding reduzido para dispositivos menores */
+        gap: 2rem; /* Gap reduzido entre os elementos */
+        max-width: 100%; /* Permite que o resultado preencha toda a largura */
+    }
+
+    .webcam-container {
+        padding: 1rem; /* Padding reduzido para o container */
+        gap: 2rem; /* Espaço reduzido entre vídeo e resultados */
+    }
+}
+
+@media (max-width: 480px) {
+    .results-container {
+        grid-template-columns: 1fr; /* Mantém uma coluna única */
+    }
+
+    .result {
+        width: 90%; /* Ajusta a largura para melhor adequação na tela */
+    }
+}

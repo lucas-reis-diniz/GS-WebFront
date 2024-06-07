@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import { auth, provider } from './configGoogle';
 import { signInWithPopup } from 'firebase/auth';
 import googleBtn from '../../assets/web_neutral_rd_na@2x.png'
 import './Login.scss';
 import Baleia from '../../assets/baleia.svg';
+import Header from "../../components/Header/Header.jsx";
 
 function Login() {
     const [username, setUsername] = useState('');

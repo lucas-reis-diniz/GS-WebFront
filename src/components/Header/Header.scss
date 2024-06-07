@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 
-*{
+* {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
@@ -39,25 +39,46 @@
             justify-content: space-around;
         }
 
-            .header-container-links a{
-                color: white;
+.header-container-links a {
+    color: white;
+    font-family: 'K2D';
+    font-size: medium; /* Ajuste para uma fonte menor */
+    text-decoration: none;
+    cursor: pointer;
+}
 
-                font-family: 'K2D';
-                font-size: large;
-                text-decoration: none;
-                cursor: pointer;
-            }
-        .logout-btn{
-            width: 8em;
-            height: 4em;
+.logout-btn {
+    width: 6em; /* Tamanho reduzido */
+    height: 3em; /* Altura reduzida */
+    font-family: 'K2D';
+    font-weight: bold;
+    color: #021A22;
+    border: none;
+    border-radius: 50px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    cursor: pointer;
+}
 
-            font-family: 'K2D';
-            font-weight: bold;
-            color: #021A22;
+/* Media Query para telas menores */
+@media (max-width: 768px) {
+    .header-container {
+        padding: 1em; /* Padding ainda menor para telas pequenas */
+        gap: 2rem;
+        flex-direction: column; /* Mudança na disposição dos itens */
+    }
 
-            border: none;
-            border-radius: 50px;
-            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    .header-container-logo h1, h2 {
+        font-size: 1em; /* Tamanho da fonte reduzido para caber em telas pequenas */
+    }
 
-            cursor: pointer;
-        }
+    .header-container-links {
+        width: 100%;
+        justify-content: space-evenly; /* Melhor distribuição dos links */
+        flex-wrap: wrap; /* Permite que os itens se ajustem conforme necessário */
+    }
+
+    .logout-btn {
+        width: 100%; /* O botão de logout se expande para ocupar a largura */
+        margin-top: 10px; /* Espaço extra após os links para melhor separação */
+    }
+}

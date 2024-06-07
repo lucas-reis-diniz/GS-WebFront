@@ -10,11 +10,9 @@ body {
 
 main {
     width: 100%;
-    height: 100vh;
+    height: auto; /* Alterado de 100vw para auto para se ajustar ao conteúdo */
     background-image: url('../../assets/background-main.svg');
-    background-repeat: no-repeat;
     background-size: cover;
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,13 +20,35 @@ main {
 
 .main-container {
     width: 85%;
-    height: 85%;
+    height: auto; /* Alterado para auto para acomodar o conteúdo internamente */
     display: flex;
     flex-direction: column;
-
     background: rgba(51, 153, 157, 0.58);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(7.6px);
     -webkit-backdrop-filter: blur(7.6px);
+}
+
+/* Responsividade para dispositivos menores */
+@media (max-width: 768px) {
+    .main-container {
+        width: 95%; /* Aumento da largura para melhor utilização do espaço disponível */
+        padding: 1rem; /* Adição de padding para melhorar a visualização */
+        flex-direction: column; /* Certificando-se de que a direção da flexão é apropriada */
+    }
+
+    main {
+        padding: 10px; /* Adicionando padding ao main para evitar que toque nas bordas da tela */
+    }
+}
+
+@media (max-width: 480px) {
+    .main-container {
+        width: 100%; /* Usando toda a largura disponível em dispositivos muito pequenos */
+    }
+
+    body {
+        font-size: 14px; /* Diminuindo o tamanho da fonte para melhor legibilidade */
+    }
 }

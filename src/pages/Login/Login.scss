@@ -9,11 +9,10 @@
 
 main {
     width: 100%;
-    height: 100vh;
+    height: 100vh ;
     background-image: url('../../assets/background-main.svg');
     background-repeat: no-repeat;
     background-size: cover;
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -21,12 +20,11 @@ main {
 
 .main-container-login {
     width: 85%;
-    height: 85%;
-
+    height: 100vh;
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: space-around;
-
     background: rgba(51, 153, 157, 0.58);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -36,18 +34,14 @@ main {
 
 .left-container-title {
     width: 40%;
-
     display: flex;
     align-items: center;
     justify-content: space-around;
-
     color: white;
 }
 
 .left-container {
-
     height: 100%;
-
     display: flex;
     flex-direction: column;
     align-items: left;
@@ -56,7 +50,6 @@ main {
 
 .right-container {
     height: 26em;
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -66,11 +59,9 @@ main {
 
 .right-container-title {
     height: 6em;
-
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-
     color: white;
 }
 
@@ -97,15 +88,12 @@ main {
 .login-btn {
     width: 10em;
     height: 4em;
-
     font-family: 'K2D';
     font-weight: bold;
     color: #021A22;
-
     border: none;
     border-radius: 50px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-
     cursor: pointer;
 }
 
@@ -117,4 +105,42 @@ main {
     margin-top: 1em;
     color: red;
     font-size: 0.9em;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .main-container-login {
+        flex-direction: column;
+        width: 95%;
+        height: auto;
+        padding: 1em;
+    }
+
+    .left-container, .right-container {
+        width: 100%;
+        align-items: center;
+    }
+
+    .left-container-title, .right-container-title {
+        flex-direction: column;
+    }
+
+    .login-form {
+        width: 90%;
+    }
+
+    .google-btn {
+        width: 4em;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-form input, .login-btn {
+        padding: 0.8em;
+        width: 100%;
+    }
+
+    .google-btn {
+        width: 3.5em;
+    }
 }

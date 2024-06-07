@@ -9,7 +9,7 @@
 
 main {
     width: 100%;
-    height: 100%;
+    height: 100vw !important;
     background-image: url('../../assets/background-main.svg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -20,7 +20,7 @@ main {
 
 .main-container {
     width: 85%;
-    height: 100vh;
+    height: 100vw !important;
     display: flex;
     flex-direction: column;
     background: rgba(51, 153, 157, 0.58);
@@ -66,14 +66,13 @@ main {
     width: 45em;
     position: absolute;
     right: 100px;
-        bottom: -10rem;
-
+    bottom: 18rem;
 }
 
 .raia {
     width: 15em;
     position: absolute;
-    bottom: -10rem;
+    bottom: 18rem;
 }
 
 /* Responsividade para dispositivos móveis */
